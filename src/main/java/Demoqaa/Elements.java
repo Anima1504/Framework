@@ -5,6 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.concurrent.TimeUnit;
+
 public class Elements{
     static WebDriver driver;
 
@@ -14,7 +16,7 @@ public class Elements{
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/webtables");
     }
-      @Test()
+
     public void webtables(){
         driver.findElement(By.xpath("//button[@id=\"addNewRecordButton\"]")).click();
         driver.findElement(By.xpath("//input[@id=\"firstName\"]")).sendKeys("Anitha");
@@ -26,33 +28,34 @@ public class Elements{
         driver.findElement(By.xpath("//button[@id=\"submit\"]")).click();
     }
 
-    public  void buttons() throws InterruptedException {
+    public  void buttons() {
         JavascriptExecutor jre = ((JavascriptExecutor) driver);
         jre.executeScript("window.scrollBy(0,450)", "");
         driver.findElement(By.xpath("//li[@id=\"item-4\"]")).click();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
         Actions action = new Actions(driver);
         WebElement doubleClick = driver.findElement(By.xpath("//button[@id=\"doubleClickBtn\"]"));
         action.doubleClick(doubleClick).perform();
         System.out.println(doubleClick.getText());
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
         Actions action1 = new Actions(driver);
         WebElement rightClick = driver.findElement(By.xpath("//button[@id=\"rightClickBtn\"]"));
         action1.contextClick(rightClick).perform();
         System.out.println(rightClick.getText());
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
+
         Actions action2 = new Actions(driver);
         WebElement click = driver.findElement(By.xpath("//button[text()=\"Click Me\"]"));
         click.click();
         System.out.println(click.getText());
     }
-    public void links() throws InterruptedException {
+    public void links()  {
         JavascriptExecutor jr1 = ((JavascriptExecutor) driver);
         jr1.executeScript("window.scrollBy(0,350)", "");
         driver.findElement(By.xpath("//li[@id=\"item-5\"]")).click();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//a[text()='Home']")).click();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
         driver.switchTo().window(driver.getWindowHandle());
         System.out.println(driver.getTitle());
          driver.navigate().back();
